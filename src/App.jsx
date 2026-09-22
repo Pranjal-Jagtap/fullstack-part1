@@ -1,6 +1,5 @@
 import { useState } from 'react'
 
-// Step 1: Button Component
 const Button = (props) => {
   return (
     <button onClick={props.onClick}>
@@ -9,21 +8,20 @@ const Button = (props) => {
   )
 }
 
-// Step 3: StatisticLine Component
 const StatisticLine = (props) => {
   return (
-    <p>
-      {props.text} {props.value}
-    </p>
+    <tr>
+      <td>{props.text}</td>
+      <td>{props.value}</td>
+    </tr>
   )
 }
 
-// Step 4: Modified Statistics Component
 const Statistics = (props) => {
   if (props.all === 0) {
     return (
       <div>
-        <h2>statistics</h2>
+        <h2>Statistics</h2>
         <p>No feedback given</p>
       </div>
     )
@@ -31,13 +29,17 @@ const Statistics = (props) => {
 
   return (
     <div>
-      <h2>statistics</h2>
-      <StatisticLine text="Good" value={props.good} />
-      <StatisticLine text="Neutral" value={props.neutral} />
-      <StatisticLine text="Bad" value={props.bad} />
-      <StatisticLine text="All" value={props.all} />
-      <StatisticLine text="Average" value={props.average} />
-      <StatisticLine text="Positive" value={`${props.positive} %`} />
+      <h2>Statistics</h2>
+      <table>
+        <tbody>
+          <StatisticLine text="Good" value={props.good} />
+          <StatisticLine text="Neutral" value={props.neutral} />
+          <StatisticLine text="Bad" value={props.bad} />
+          <StatisticLine text="All" value={props.all} />
+          <StatisticLine text="Average" value={props.average} />
+          <StatisticLine text="Positive" value={`${props.positive} %`} />
+        </tbody>
+      </table>
     </div>
   )
 }
@@ -53,13 +55,10 @@ const App = () => {
 
   return (
     <div>
-      <h1>give feedback</h1>
-
-      {/* Step 2: Using the Button components */}
+      <h1>Give Feedback</h1>
       <Button onClick={() => setGood(good + 1)} text="Good" />
       <Button onClick={() => setNeutral(neutral + 1)} text="Neutral" />
       <Button onClick={() => setBad(bad + 1)} text="Bad" />
-
       <Statistics
         good={good}
         neutral={neutral}
