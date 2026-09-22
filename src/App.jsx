@@ -1,7 +1,16 @@
 import { useState } from 'react'
 
-// Step 1: Create the Statistics component
+
 const Statistics = (props) => {
+  if (props.all === 0) {
+    return (
+      <div>
+        <h2>statistics</h2>
+        <p>No feedback given</p>
+      </div>
+    )
+  }
+
   return (
     <div>
       <h2>statistics</h2>
@@ -16,12 +25,10 @@ const Statistics = (props) => {
 }
 
 const App = () => {
-  // State remains in the App component
   const [good, setGood] = useState(0)
   const [neutral, setNeutral] = useState(0)
   const [bad, setBad] = useState(0)
 
-  // Step 2: Keep calculations in App
   const all = good + neutral + bad
   const average = all === 0 ? 0 : (good - bad) / all
   const positive = all === 0 ? 0 : (good / all) * 100
@@ -34,7 +41,6 @@ const App = () => {
       <button onClick={() => setNeutral(neutral + 1)}>neutral</button>
       <button onClick={() => setBad(bad + 1)}>bad</button>
 
-      {/* Step 3: Use the Statistics component */}
       <Statistics
         good={good}
         neutral={neutral}
