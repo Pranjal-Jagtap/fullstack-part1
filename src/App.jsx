@@ -1,16 +1,21 @@
 import { useState } from 'react'
 
 const App = () => {
-  // 1. Define state variables for each feedback type
+  // State variables for feedback counts
   const [good, setGood] = useState(0)
   const [neutral, setNeutral] = useState(0)
   const [bad, setBad] = useState(0)
+
+  // Step 1: Calculate the statistics
+  const all = good + neutral + bad
+  const average = all === 0 ? 0 : (good - bad) / all
+  const positive = all === 0 ? 0 : (good / all) * 100
 
   return (
     <div>
       <h1>give feedback</h1>
 
-      {/* 2. Add buttons with click event handlers to update state */}
+      {/* Buttons */}
       <button onClick={() => setGood(good + 1)}>
         good
       </button>
@@ -21,11 +26,14 @@ const App = () => {
         bad
       </button>
 
-      {/* 3. Display the feedback counts */}
+      {/* Step 2: Show all statistics */}
       <h2>statistics</h2>
       <p>good {good}</p>
       <p>neutral {neutral}</p>
       <p>bad {bad}</p>
+      <p>all {all}</p>
+      <p>average {average}</p>
+      <p>positive {positive} %</p>
     </div>
   )
 }
